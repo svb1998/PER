@@ -28,13 +28,15 @@ Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
 % HERE YOUR CODE
 % 
 
-[m,W]=pca(Xtr);
-for i = ks % [1 2 5 10 20 50 100 200 500]
-  XtrP = (Xtr - m) *W(:,1:i);
-  XdvP = (Xdv - m) *W(:,1:i);
-  [err]=knn(XtrP,xltr,XdvP,xldv,1)
-  
-% Operaciones de lectura del fichero
-
-
+[m W] = pca(Xtr);
+A = [];
+for i = ks 
+    XtrP = (Xtr - m) * W(:, 1:i);
+    XdvP = (Xdv - m) * W(:, 1:i);
+    [err] = knn(XtrP, xltr, XdvP, xldv, 1);
+    aux = [i, err];
+    A = cat( 1 , A, aux);
 end
+
+save_precision(4); save("err.out", "A");
+
