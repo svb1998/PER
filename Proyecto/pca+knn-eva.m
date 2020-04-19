@@ -20,3 +20,18 @@ load(telabs);
 %
 % HERE YOUR CODE
 %
+
+[m W] = pca(X);
+A = [];
+for i = k
+    Xr = (X - m) * W(:, 1:i);
+    Yr = (Y - m) * W(:, 1:i);
+	[err] = knn(Xr, xl, Yr, yl, 1);
+	aux = [i, err];
+    A = cat( 1 , A, aux);
+	printf("%d\t%.3f\n", i, err);
+end
+
+save_precision(4); save("erroor.out", "A");
+
+	
