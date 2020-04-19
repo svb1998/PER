@@ -17,10 +17,6 @@ load(trlabs);
 load(tedata);
 load(telabs);
 
-%
-% HERE YOUR CODE
-%
-
 [m W] = pca(X);
 A = [];
 for i = k
@@ -33,5 +29,3 @@ for i = k
 end
 
 save_precision(4); save("erroor.out", "A");
-
-	

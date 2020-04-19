@@ -11,7 +11,7 @@ while(error)
 	for i = 1:N
 		Vi = V(:,i);
 		c = knnV(Vi,ind,xl,1);
-		if(c!=c(:,i))
+		if(c!=xl(i, :))
 			ind = setdiff(ind,[i]);
 			error = true;
 	end

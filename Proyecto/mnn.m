@@ -2,12 +2,12 @@
 function [V] = mnn(X,xl,m)
 N=rows(X);
 
+V = [];
+
 numbatches=N*N*4/intmax*10;
 if (numbatches<1) numbatches=1; end
 
 batchsize=ceil(N/numbatches);
-
-
 
 
 for i=1:m
