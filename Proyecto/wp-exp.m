@@ -28,22 +28,25 @@ Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
 % HERE YOUR CODE
 % 
 
-ind=wilson(Xtr,xltr,ks);
-err=knn(Xtr(ind,:),xltr(ind),Xdv,xldv,ks);
-printf("err");
+ind=wilson(Xtr,xltr,1);
+err=knn(Xtr(ind,:),xltr(ind),Xdv,xldv,1);
+printf("err %d \n", err);
 
 
 [m W] = pca(Xtr);
+printf("Hecho PCA \n");
 A = [];
 for i = ks 
+	printf("Iteracion en wp-exp %d \n", i);
     XtrP = (Xtr - m) * W(:, 1:i);
-	ind=wilson(XtrP,xltr,i);
+	ind=wilson(XtrP,xltr,1);
+	printf("HE PASADO EL SEGUNDO WILSON en la iteracion %d \n",i)
     XdvP = (Xdv - m) * W(:, 1:i);
-    [err] = knn(XtrP(ind,:), xltr(ind), XdvP, xldv, i);
+    [err] = knn(XtrP(ind,:), xltr(ind), XdvP, xldv, 1);
     aux = [i, err];
-	printf("err", err);
+	printf("err %d\n", err);
     A = cat( 1 , A, aux);
 end
 
-save_precision(4); save("wp-exp.out", "A");
+save_precision(4); save("wp-exper.out", "A");
 
