@@ -18,7 +18,7 @@ load(tedata);
 load(telabs);
 
 ind=wilson(X,xl,1);
-err=knn(X(ind,:),xl(ind),Y,Yl,1);
+err=knn(X(ind,:),xl(ind),Y,yl,1);
 printf("error sin PCA:  %d \n", err);
 save_precision(4); save("wp-evaNOpca.out", "err");
 
