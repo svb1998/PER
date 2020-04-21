@@ -30,7 +30,8 @@ Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
 
 ind=wilson(Xtr,xltr,1);
 err=knn(Xtr(ind,:),xltr(ind),Xdv,xldv,1);
-printf("err %d \n", err);
+printf("error sin PCA:  %d \n", err);
+save_precision(4); save("wp-expNOpca.out", "err");
 
 
 [m W] = pca(Xtr);

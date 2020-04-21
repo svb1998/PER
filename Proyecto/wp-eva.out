@@ -1,0 +1,16 @@
+# Created by Octave 4.2.2, Mon Apr 21 18:58:07 2020 CEST <svb_1998@SVB-PC>
+# name: A
+# type: matrix
+# rows: 9
+# columns: 2
+ 1 74.62
+ 2 64.4
+ 5 40.67
+ 10 45.77
+ 20 43.88
+ 50 42.12
+ 100 41.22
+ 200 40.47
+ 500 40.18
+
+
