@@ -16,16 +16,13 @@ load(trdata);
 load(trlabs);
 
 N=rows(X);
-rand("seed",23); permutation=randperm(N);
-X=X(permutation,:); xl=xl(permutation,:);
+
 
 Ntr=round(trper/100*N);
 Ndv=round(dvper/100*N);
 Xtr=X(1:Ntr,:); xltr=xl(1:Ntr);
 Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
 
-load(trdata);
-load(trlabs);
 
-multinomial(Xtr, xltr, Xdv, xldv, epsilons)
+multinomial(Xtr, xltr, Xdv, xldv, epsilons);
 
