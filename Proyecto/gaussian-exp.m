@@ -24,5 +24,14 @@ Xtr=X(1:Ntr,:); xltr=xl(1:Ntr);
 Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
 
 
-gaussian(Xtr, xltr, Xdv, xldv, alphas);
+plot_mat = [];
+
+for a=alphas
+
+    [etr, edv] = gaussian(Xtr, xltr, Xdv, xldv, a);
+    plot_mat = [plot_mat; a, edv];
+
+endfor
+
+save_precision(4); save("erorr_gauss.out", "plot_mat");
 

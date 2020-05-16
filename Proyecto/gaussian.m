@@ -1,6 +1,5 @@
 function [etr, edv] = gaussian(Xtr, xltr, Xdv, xldv, alphas)
 
-    plot_mat = [];
 
     %Probabilidad a priori clases
     pc = [];
@@ -35,6 +34,7 @@ function [etr, edv] = gaussian(Xtr, xltr, Xdv, xldv, alphas)
     
     for a = alphas
         G = [];
+        Gv = [];
 
         for i = unique(xltr)'
             i_mat = eye(rows(sigma{i+1}));
@@ -47,11 +47,18 @@ function [etr, edv] = gaussian(Xtr, xltr, Xdv, xldv, alphas)
         cls = i_max - 1;
         etr = mean(xltr!=cls)*100;
 
-        plot_mat = [plot_mat; a, etr];
-    
+        for i = unique(xldv)'
+            i_mat = eye(rows(sigma{i+1}));
+            norm_sigma =  a * sigma{i+1} + (1 - a) * i_mat;
+            gc_vect = gc( pc(i+1, :), mu(i+1, :)', norm_sigma, Xdv);
+            Gv = [Gv , gc_vect];
+        endfor
+
+        [val_max, i_max] = max(Gv, [], 2);
+        cls = i_max - 1;
+        edv = mean(xldv!=cls)*100;
     endfor
     
-    save_precision(4); save("erorr_gauss.out", "plot_mat");
 
 
 endfunction
