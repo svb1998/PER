@@ -1,4 +1,4 @@
-#!/snap/bin/octave -qf
+#!/usr/bin/octave -qf
 
 if (nargin!=5)
 printf("Usage: gaussian+pca-eva.m <trdata> <trlabels> <tedata> <telabels> <alphas>\n")

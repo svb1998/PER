@@ -1,4 +1,4 @@
-#!/snap/bin/octave -qf
+#!/usr/bin/octave -qf
 
 if (nargin!=5)
 printf("Usage: pca+knn-exp.m <trdata> <trlabels> <epsilons> <%%trper> <%%dvper>\n")
