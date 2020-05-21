@@ -17,6 +17,9 @@ load(trlabs);
 
 N=rows(X);
 
+rand("seed",23); permutation=randperm(N);
+X=X(permutation,:); xl=xl(permutation,:);
+
 
 Ntr=round(trper/100*N);
 Ndv=round(dvper/100*N);
