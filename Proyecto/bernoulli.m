@@ -1,8 +1,8 @@
 function [etr, edv]=bernoulli(Xtr, xltr, Xdv, xldv, epsilons)
 
     %Binarizacion de parametros
-    Xtr = binarize(Xtr);
     Xdv = binarize(Xdv);
+    Xtr = binarize(Xtr);
 
     %Probabilidades a Priori
     clas_prob = [];
@@ -30,8 +30,9 @@ function [etr, edv]=bernoulli(Xtr, xltr, Xdv, xldv, epsilons)
         %Parametro de Bernoulli clase i
         Xtri = Xtr(ind_i, :);
         added_vector = sum(Xtri);
-        ber_par_i = added_vector / N;
-        ber_par = cat(1, ber_par, ber_par_i);
+        
+        ber_par_i = added_vector / cn;
+        ber_par = cat(1, ber_par, ber_par_i);    
     end
 
     for e = epsilons
@@ -44,14 +45,14 @@ function [etr, edv]=bernoulli(Xtr, xltr, Xdv, xldv, epsilons)
 
         cls = [];
 
-        wc = log(smoot_ber_par') - log(1 - smoot_ber_par');
-        w0 = log(clas_prob') - sum(log(1 - smoot_ber_par'));
+        wc = log(smoot_ber_par) - log(1 - smoot_ber_par);
+        w0 = log(clas_prob) + sum(log(1 - smoot_ber_par), 2);
 
-        [val_max, i_max] = max(Xdv * wc + w0, [], 2);
+        [val_max, i_max] = max(Xdv * wc' + w0', [], 2);
         cls = i_max - 1;
         edv = mean(xldv!=cls)*100;
 
-        [val_max, i_max] = max(Xtr * wc + w0, [], 2);
+        [val_max, i_max] = max( Xtr * wc' + w0', [], 2);
         cls = i_max - 1;
         etr = mean(xltr!=cls)*100;
     end
